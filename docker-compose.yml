@@ -1,135 +1,128 @@
 services:
-  mariadb_site:
+  mariadb-site:
     image: bitnami/mariadb:latest
-    container_name: mariadb_site
     environment:
-      MARIADB_ROOT_USER: ${MARIADB_ROOT_USER}
-      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
-      MARIADB_USER: ${MARIADB_USER}
-      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
-      MARIADB_DATABASE: ${WORDPRESS_SITE_DB_NAME}
+      - MARIADB_ROOT_PASSWORD=${DATABASE_ROOT_PASSWORD}
+      - MARIADB_DATABASE=wordpress_site_db
+      - MARIADB_USER=wordpress_site_user
+      - MARIADB_PASSWORD=${DATABASE_PASSWORD}
     volumes:
-      - /home/shtf/mysql_site:/var/lib/mysql
+      - /home/shtf/mariadb-site:/bitnami/mariadb
     networks:
-      - app_network
+      - app-network
+    restart: unless-stopped
 
-  mariadb_store:
+  mariadb-store:
     image: bitnami/mariadb:latest
-    container_name: mariadb_store
     environment:
-      MARIADB_ROOT_USER: ${MARIADB_ROOT_USER}
-      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
-      MARIADB_USER: ${MARIADB_USER}
-      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
-      MARIADB_DATABASE: ${WORDPRESS_STORE_DB_NAME}
+      - MARIADB_ROOT_PASSWORD=${DATABASE_ROOT_PASSWORD}
+      - MARIADB_DATABASE=wordpress_store_db
+      - MARIADB_USER=wordpress_store_user
+      - MARIADB_PASSWORD=${DATABASE_PASSWORD}
     volumes:
-      - /home/shtf/mysql_store:/var/lib/mysql
+      - /home/shtf/mariadb-store:/bitnami/mariadb
     networks:
-      - app_network
+      - app-network
+    restart: unless-stopped  
 
-  mariadb_phpbb:
+  mariadb-phpbb:
     image: bitnami/mariadb:latest
-    container_name: mariadb_phpbb
     environment:
-      MARIADB_ROOT_USER: ${MARIADB_ROOT_USER}
-      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
-      MARIADB_USER: ${MARIADB_USER}
-      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
-      MARIADB_DATABASE: ${PHPBB_DB_NAME}
+      - MARIADB_ROOT_PASSWORD=${DATABASE_ROOT_PASSWORD}
+      - MARIADB_DATABASE=phpbb_db
+      - MARIADB_USER=phpbb_user
+      - MARIADB_PASSWORD=${DATABASE_PASSWORD}
     volumes:
-      - /home/shtf/mysql_phpbb:/var/lib/mysql
+      - /home/shtf/mariadb-phpbb:/bitnami/mariadb
     networks:
-      - app_network
+      - app-network
+    restart: unless-stopped
 
-  mariadb_osclass:
+  mariadb-osclass:
     image: bitnami/mariadb:latest
-    container_name: mariadb_osclass
     environment:
-      MARIADB_ROOT_USER: ${MARIADB_ROOT_USER}
-      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
-      MARIADB_USER: ${MARIADB_USER}
-      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
-      MARIADB_DATABASE: ${OSCLASS_DB_NAME}
+      - MARIADB_ROOT_PASSWORD=${DATABASE_ROOT_PASSWORD}
+      - MARIADB_DATABASE=osclass_db
+      - MARIADB_USER=osclass_user
+      - MARIADB_PASSWORD=${DATABASE_PASSWORD}
     volumes:
-      - /home/shtf/mysql_osclass:/var/lib/mysql
+      - /home/shtf/mariadb-osclass:/bitnami/mariadb
     networks:
-      - app_network
+      - app-network
+    restart: unless-stopped
 
-  wordpress_site:
+  wordpress-site:
     image: bitnami/wordpress:latest
-    container_name: wordpress_site
     environment:
-      WORDPRESS_DATABASE_HOST: mariadb_site
-      WORDPRESS_DATABASE_USER: ${MARIADB_USER}
-      WORDPRESS_DATABASE_PASSWORD: ${MARIADB_PASSWORD}
-      WORDPRESS_DATABASE_NAME: ${WORDPRESS_SITE_DB_NAME}
-      WORDPRESS_USERNAME: ${USERNAME}
-      WORDPRESS_PASSWORD: ${PASSWORD}
+      - WORDPRESS_DATABASE_HOST=mariadb-site
+      - WORDPRESS_DATABASE_USER=wordpress_site_user
+      - WORDPRESS_DATABASE_PASSWORD=${DATABASE_PASSWORD}
+      - WORDPRESS_DATABASE_NAME=wordpress_site_db
+      - WORDPRESS_USERNAME=${ADMIN_USER}
+      - WORDPRESS_PASSWORD=${ADMIN_PASSWORD}
+      - WORDPRESS_EMAIL=${ADMIN_EMAIL}
     volumes:
-      - /home/shtf/wordpress:/var/www/html
+      - /home/shtf/wordpress-site:/bitnami/wordpress
     ports:
-      - "8080:8080"
-    depends_on:
-      - mariadb_site
+      - "30001:8080"
     networks:
-      - app_network
+      - app-network
+    restart: unless-stopped
 
-  wordpress_store:
+  wordpress-store:
     image: bitnami/wordpress:latest
-    container_name: wordpress_store
     environment:
-      WORDPRESS_DATABASE_HOST: mariadb_store
-      WORDPRESS_DATABASE_USER: ${MARIADB_USER}
-      WORDPRESS_DATABASE_PASSWORD: ${MARIADB_PASSWORD}
-      WORDPRESS_DATABASE_NAME: ${WORDPRESS_STORE_DB_NAME}
-      WORDPRESS_USERNAME: ${USERNAME}
-      WORDPRESS_PASSWORD: ${PASSWORD}
+      - WORDPRESS_DATABASE_HOST=mariadb-store
+      - WORDPRESS_DATABASE_USER=wordpress_store_user
+      - WORDPRESS_DATABASE_PASSWORD=${DATABASE_PASSWORD}
+      - WORDPRESS_DATABASE_NAME=wordpress_store_db
+      - WORDPRESS_USERNAME=${ADMIN_USER}
+      - WORDPRESS_PASSWORD=${ADMIN_PASSWORD}
+      - WORDPRESS_EMAIL=${ADMIN_EMAIL}
     volumes:
-      - /home/shtf/wordpress_store:/var/www/html
+      - /home/shtf/wordpress-store:/bitnami/wordpress
     ports:
-      - "8081:8080"
-    depends_on:
-      - mariadb_store
+      - "30002:8080"
     networks:
-      - app_network
+      - app-network
+    restart: unless-stopped
 
   phpbb:
     image: bitnami/phpbb:latest
-    container_name: phpbb
     environment:
-      PHPBB_DATABASE_HOST: mariadb_phpbb
-      PHPBB_DATABASE_USER: ${MARIADB_USER}
-      PHPBB_DATABASE_PASSWORD: ${MARIADB_PASSWORD}
-      PHPBB_DATABASE_NAME: ${PHPBB_DB_NAME}
-      PHPBB_USERNAME: ${USERNAME}
-      PHPBB_PASSWORD: ${PASSWORD}
+      - PHPBB_DATABASE_HOST=mariadb-phpbb
+      - PHPBB_DATABASE_USER=phpbb_user
+      - PHPBB_DATABASE_PASSWORD=${DATABASE_PASSWORD}
+      - PHPBB_DATABASE_NAME=phpbb_db
+      - PHPBB_USERNAME=${ADMIN_USER}
+      - PHPBB_PASSWORD=${ADMIN_PASSWORD}
+      - PHPBB_EMAIL=${ADMIN_EMAIL}
     volumes:
-      - /home/shtf/phpbb:/var/www/html
+      - /home/shtf/phpbb:/bitnami/phpbb
     ports:
-      - "8082:8080"
-    depends_on:
-      - mariadb_phpbb
+      - "30003:8080"
     networks:
-      - app_network
+      - app-network
+    restart: unless-stopped
 
   osclass:
     image: bitnami/osclass:latest
-    container_name: osclass
     environment:
-      OSCLASS_DATABASE_HOST: mariadb_osclass
-      OSCLASS_DATABASE_USER: ${MARIADB_USER}
-      OSCLASS_DATABASE_PASSWORD: ${MARIADB_PASSWORD}
-      OSCLASS_DATABASE_NAME: ${OSCLASS_DB_NAME}
-      OSCLASS_USERNAME: ${USERNAME}
-      OSCLASS_PASSWORD: ${PASSWORD}
+      - OSCLASS_DATABASE_HOST=mariadb-osclass
+      - OSCLASS_DATABASE_USER=osclass_user
+      - OSCLASS_DATABASE_PASSWORD=${DATABASE_PASSWORD}
+      - OSCLASS_DATABASE_NAME=osclass_db
+      - OSCLASS_USERNAME=${ADMIN_USER}
+      - OSCLASS_PASSWORD=${ADMIN_PASSWORD}
+      - OSCLASS_EMAIL=${ADMIN_EMAIL}
     volumes:
-      - /home/shtf/osclass:/var/www/html
+      - /home/shtf/osclass:/bitnami/osclass
     ports:
-      - "8083:8080"
-    depends_on:
-      - mariadb_osclass
+      - "30004:8080"
     networks:
-      - app_network
+      - app-network
+    restart: unless-stopped
 
 networks:
-  app_network:
+  app-network:
+    driver: bridge
