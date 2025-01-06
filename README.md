@@ -58,7 +58,7 @@ DATABASE_ROOT_PASSWORD=securedbrootpassword
 Next we run the command to launch the compose file:
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 # Monitoring the Progress of Docker Compose Stack
