@@ -42,14 +42,14 @@ In order to ensure that the bind mounts work correctly for your Docker container
 Run the following commands to create the required directories on your host machine:
 
 ```bash
-mkdir -p /home/shtf/mariadb-site
-mkdir -p /home/shtf/mariadb-store
-mkdir -p /home/shtf/mariadb-phpbb
-mkdir -p /home/shtf/mariadb-osclass
-mkdir -p /home/shtf/wordpress-site
-mkdir -p /home/shtf/wordpress-store
-mkdir -p /home/shtf/phpbb
-mkdir -p /home/shtf/osclass
+mkdir -p /home/bws/mariadb-site
+mkdir -p /home/bws/mariadb-store
+mkdir -p /home/bws/mariadb-phpbb
+mkdir -p /home/bws/mariadb-osclass
+mkdir -p /home/bws/wordpress-site
+mkdir -p /home/bws/wordpress-store
+mkdir -p /home/bws/phpbb
+mkdir -p /home/bws/osclass
 ```
 ### Set Permissions for Docker to Access the Directories
 
@@ -58,14 +58,8 @@ To ensure Docker has write access to the `/home/shtf` directory (and its subdire
 If you're using the default Docker group on your system, you can modify the permissions as follows:
 
 ```bash
-# Change ownership of the /home/shtf directory and all its subdirectories
-chown -R $USER:docker /home/shtf
-
-# Alternatively, if you are not in the docker group, you can use 'docker' as the group name directly
-chown -R $USER:docker /home/shtf
-
 # Set proper read/write permissions for all files and directories
-chmod -R 775 /home/shtf
+chmod -R 777 /home/bws
 ```
 
 ### 1. Clone the Repository
