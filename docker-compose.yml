@@ -7,7 +7,7 @@ services:
       - MARIADB_USER=wordpress_site_user
       - MARIADB_PASSWORD=${DATABASE_PASSWORD}
     volumes:
-      - /home/shtf/mariadb-site:/bitnami/mariadb
+      - /home/bws/mariadb-site:/bitnami/mariadb
     networks:
       - app-network
     restart: unless-stopped
@@ -20,7 +20,7 @@ services:
       - MARIADB_USER=wordpress_store_user
       - MARIADB_PASSWORD=${DATABASE_PASSWORD}
     volumes:
-      - /home/shtf/mariadb-store:/bitnami/mariadb
+      - /home/bws/mariadb-store:/bitnami/mariadb
     networks:
       - app-network
     restart: unless-stopped  
@@ -33,7 +33,7 @@ services:
       - MARIADB_USER=phpbb_user
       - MARIADB_PASSWORD=${DATABASE_PASSWORD}
     volumes:
-      - /home/shtf/mariadb-phpbb:/bitnami/mariadb
+      - /home/bws/mariadb-phpbb:/bitnami/mariadb
     networks:
       - app-network
     restart: unless-stopped
@@ -46,7 +46,7 @@ services:
       - MARIADB_USER=osclass_user
       - MARIADB_PASSWORD=${DATABASE_PASSWORD}
     volumes:
-      - /home/shtf/mariadb-osclass:/bitnami/mariadb
+      - /home/bws/mariadb-osclass:/bitnami/mariadb
     networks:
       - app-network
     restart: unless-stopped
@@ -62,7 +62,7 @@ services:
       - WORDPRESS_PASSWORD=${ADMIN_PASSWORD}
       - WORDPRESS_EMAIL=${ADMIN_EMAIL}
     volumes:
-      - /home/shtf/wordpress-site:/bitnami/wordpress
+      - /home/bws/wordpress-site:/bitnami/wordpress
     ports:
       - "30001:8080"
     networks:
@@ -80,7 +80,7 @@ services:
       - WORDPRESS_PASSWORD=${ADMIN_PASSWORD}
       - WORDPRESS_EMAIL=${ADMIN_EMAIL}
     volumes:
-      - /home/shtf/wordpress-store:/bitnami/wordpress
+      - /home/bws/wordpress-store:/bitnami/wordpress
     ports:
       - "30002:8080"
     networks:
@@ -98,7 +98,7 @@ services:
       - PHPBB_PASSWORD=${ADMIN_PASSWORD}
       - PHPBB_EMAIL=${ADMIN_EMAIL}
     volumes:
-      - /home/shtf/phpbb:/bitnami/phpbb
+      - /home/bws/phpbb:/bitnami/phpbb
     ports:
       - "30003:8080"
     networks:
@@ -116,7 +116,7 @@ services:
       - OSCLASS_PASSWORD=${ADMIN_PASSWORD}
       - OSCLASS_EMAIL=${ADMIN_EMAIL}
     volumes:
-      - /home/shtf/osclass:/bitnami/osclass
+      - /home/bws/osclass:/bitnami/osclass
     ports:
       - "30004:8080"
     networks:
