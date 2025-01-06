@@ -54,3 +54,23 @@ ADMIN_PASSWORD=secureadminpassword
 DATABASE_PASSWORD=securedbpassword
 DATABASE_ROOT_PASSWORD=securedbrootpassword
 ```
+Next we run the command to launch the compose file:
+
+```bash
+docker-compose up -d
+```
+
+# Monitoring the Progress of Docker Compose Stack
+
+Once you've launched a stack using `docker-compose up -d`, you can check the progress of the installation or monitor the status of your services in several ways. Below are methods to check the progress.
+
+## 1. Check the Logs for Specific Services
+
+To see the installation or startup progress for a specific service, you can check its logs.
+
+#### Command:
+```bash
+docker-compose logs <service-name>
+```
+
+Thanks for reading and feel free to reach out with any questions or comments. 
