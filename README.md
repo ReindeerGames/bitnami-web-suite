@@ -48,16 +48,9 @@ The `.env` file is used to configure environment variables that define database 
 Create a `.env` file in the root of the repository with the following variables:
 
 ```bash
-MARIADB_ROOT_USER=root
-MARIADB_ROOT_PASSWORD=password
-MARIADB_USER=bitnami
-MARIADB_PASSWORD=password
-
-WORDPRESS_SITE_DB_NAME=wordpress_site
-WORDPRESS_STORE_DB_NAME=wordpress_store
-PHPBB_DB_NAME=shtf_phpbb
-OSCLASS_DB_NAME=shtf_osclass
-
-USERNAME=username
-PASSWORD=password
+ADMIN_EMAIL=example@example.com
+ADMIN_USER=admin
+ADMIN_PASSWORD=secureadminpassword
+DATABASE_PASSWORD=securedbpassword
+DATABASE_ROOT_PASSWORD=securedbrootpassword
 ```
