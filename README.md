@@ -29,6 +29,7 @@ Before using this setup, make sure you have the following installed:
 
 - **Docker**: Docker must be installed and running on your machine. [Install Docker](https://www.docker.com/get-started).
 - **Docker Compose**: Docker Compose is required to define and run multi-container Docker applications. [Install Docker Compose](https://docs.docker.com/compose/install/).
+- **Git**: Git is required to clone repositories and manage source code. [Install Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
 
 ## How to Use
 
