@@ -33,6 +33,41 @@ Before using this setup, make sure you have the following installed:
 
 ## How to Use
 
+## Directory Setup
+
+In order to ensure that the bind mounts work correctly for your Docker containers, you must create specific directories on your host machine. These directories will store the persistent data for your MariaDB and WordPress containers.
+
+### Create the Necessary Directories on the Host Machine
+
+Run the following commands to create the required directories on your host machine:
+
+```bash
+mkdir -p /home/shtf/mariadb-site
+mkdir -p /home/shtf/mariadb-store
+mkdir -p /home/shtf/mariadb-phpbb
+mkdir -p /home/shtf/mariadb-osclass
+mkdir -p /home/shtf/wordpress-site
+mkdir -p /home/shtf/wordpress-store
+mkdir -p /home/shtf/phpbb
+mkdir -p /home/shtf/osclass
+```
+### Set Permissions for Docker to Access the Directories
+
+To ensure Docker has write access to the `/home/shtf` directory (and its subdirectories), you'll need to change the ownership of the `/home/shtf` directory. This will allow Docker containers to correctly mount the volumes and persist data.
+
+If you're using the default Docker group on your system, you can modify the permissions as follows:
+
+```bash
+# Change ownership of the /home/shtf directory and all its subdirectories
+chown -R $USER:docker /home/shtf
+
+# Alternatively, if you are not in the docker group, you can use 'docker' as the group name directly
+chown -R $USER:docker /home/shtf
+
+# Set proper read/write permissions for all files and directories
+chmod -R 775 /home/shtf
+```
+
 ### 1. Clone the Repository
 
 Clone this repository to your local machine:
